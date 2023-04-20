@@ -1,14 +1,11 @@
+import axios from "axios";
 import "./App.css";
-import FullComment from "./components/FullComment/FullComment";
-import NewComment from "./components/NewComment/NewComment";
-import Comment from "./container/comment/comment";
+import Discussion from "./container/Discussion/Discussion";
 
 const App = () => {
   return (
     <div className="App">
-      <Comment />
-      <FullComment />
-      <NewComment />
+      <Discussion/>
     </div>
   );
 };
