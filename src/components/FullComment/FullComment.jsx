@@ -1,21 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const FullComment = ({ commentId }) => {
+const FullComment = ({ commentId,deleteHandler }) => {
   const [fullComment, setFullComment] = useState({});
   useEffect(() => {
     if (commentId) {
       axios
-        .get(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
+        .get(`http://localhost:3030/comments/${commentId}`)
         .then((res) => setFullComment(res.data))
         .catch();
     }
   }, [commentId]);
-  const deleteHandler = () => {
-    axios
-      .delete(`https://jsonplaceholder.typicode.com/comments/${commentId}`)
-      .then((res) => console.log(res.data));
-  };
   if (!commentId) return <div>Select one comment to see details</div>;
   return (
     <section>
