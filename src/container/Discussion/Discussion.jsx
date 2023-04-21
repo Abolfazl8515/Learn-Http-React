@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Discussion.css";
+import FullComment from "../../components/FullComment/FullComment";
+import Comment from "../../components/Comment/Comment";
 
 const Discussion = () => {
   const [comments, setComments] = useState([]);
@@ -11,8 +13,9 @@ const Discussion = () => {
     });
   }, []);
   const clickHandler = (id) => {
-    const clickedComment = comments.find((c) => c.id === id);
-    setFullComment(clickedComment);
+    axios
+      .get(`https://jsonplaceholder.typicode.com/comments/${id}`)
+      .then((res) => setFullComment(res.data));
   };
   return (
     <div className="commentList">
@@ -21,20 +24,11 @@ const Discussion = () => {
           <div>Loading...</div>
         ) : (
           comments.map((c) => {
-            return (
-              <div key={c.id} onClick={() => clickHandler(c.id)}>
-                <p>Name : {c.name}</p>
-                <p>Email : {c.email}</p>
-              </div>
-            );
+            return <Comment c={c} clickHandler={clickHandler} />;
           })
         )}
       </section>
-      <section>
-        <p>Name is : {fullComment.name}</p>
-        <p>Email is : {fullComment.email}</p>
-        <p>body is : {fullComment.body}</p>
-      </section>
+      <FullComment fullComment={fullComment} />
       <section>add comments</section>
     </div>
   );
