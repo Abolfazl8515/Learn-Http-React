@@ -3,3 +3,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.commentList section {
+  width: 30%;
+}
