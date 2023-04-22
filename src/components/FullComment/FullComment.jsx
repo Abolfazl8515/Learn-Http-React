@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { get } from "../../services/httpService";
 
-const FullComment = ({ commentId,deleteHandler }) => {
+const FullComment = ({ commentId, deleteHandler }) => {
   const [fullComment, setFullComment] = useState({});
   useEffect(() => {
     if (commentId) {
-      axios
-        .get(`http://localhost:3030/comments/${commentId}`)
+      get(`/comments/${commentId}`)
         .then((res) => setFullComment(res.data))
         .catch();
     }
